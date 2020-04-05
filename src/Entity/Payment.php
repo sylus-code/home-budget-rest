@@ -19,9 +19,9 @@ class Payment
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", name="start_date")
      */
-    private $start_date;
+    private $startDate;
 
     /**
      * @ORM\Column(type="smallint")
@@ -39,9 +39,9 @@ class Payment
     private $type;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", name="due_date")
      */
-    private $due_date;
+    private $dueDate;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -54,17 +54,17 @@ class Payment
     private $note;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true, name="expiry_date")
      */
-    private $expiry_date;
+    private $expiryDate;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255 , name="bank_account_number")
      */
-    private $bank_account_number;
+    private $bankAccountNumber;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="user_id")
      */
     private $userId;
 
@@ -90,12 +90,12 @@ class Payment
 
     public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->start_date;
+        return $this->startDate;
     }
 
-    public function setStartDate(\DateTimeInterface $start_date): self
+    public function setStartDate(\DateTimeInterface $startDate): self
     {
-        $this->start_date = $start_date;
+        $this->startDate = $startDate;
 
         return $this;
     }
@@ -138,12 +138,12 @@ class Payment
 
     public function getDueDate(): ?\DateTimeInterface
     {
-        return $this->due_date;
+        return $this->dueDate;
     }
 
-    public function setDueDate(\DateTimeInterface $due_date): self
+    public function setDueDate(\DateTimeInterface $dueDate): self
     {
-        $this->due_date = $due_date;
+        $this->dueDate = $dueDate;
 
         return $this;
     }
@@ -174,24 +174,24 @@ class Payment
 
     public function getExpiryDate(): ?\DateTimeInterface
     {
-        return $this->expiry_date;
+        return $this->expiryDate;
     }
 
-    public function setExpiryDate(?\DateTimeInterface $expiry_date): self
+    public function setExpiryDate(?\DateTimeInterface $expiryDate): self
     {
-        $this->expiry_date = $expiry_date;
+        $this->expiryDate = $expiryDate;
 
         return $this;
     }
 
     public function getBankAccountNumber(): ?string
     {
-        return $this->bank_account_number;
+        return $this->bankAccountNumber;
     }
 
-    public function setBankAccountNumber(string $bank_account_number): self
+    public function setBankAccountNumber(string $bankAccountNumber): self
     {
-        $this->bank_account_number = $bank_account_number;
+        $this->bankAccountNumber = $bankAccountNumber;
 
         return $this;
     }
