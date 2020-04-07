@@ -26,7 +26,7 @@ class AddController extends AbstractController
      * @param Request
      * @return JsonResponse
      */
-    public function action(Request $request)
+    public function action(Request $request):JsonResponse
     {
         $receiverData = json_decode($request->getContent(), true);
         $receiver = $this->denormalizer->denormalize($receiverData, Receiver::class);

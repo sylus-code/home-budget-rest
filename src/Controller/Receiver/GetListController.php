@@ -28,7 +28,7 @@ class GetListController
     /**
      * @Route( path="/api/me/receiver" , name="receiver_get_list", methods={"GET"})
      */
-    public function action()
+    public function action():JsonResponse
     {
         $receivers = $this
             ->receiverRepository
