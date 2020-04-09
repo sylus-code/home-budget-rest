@@ -35,7 +35,7 @@ class GetListController
             ->findAll();
 
         if (!$receivers) {
-            return new JsonResponse([], 404);
+            return new JsonResponse([], JsonResponse::HTTP_NOT_FOUND);
         }
 
         return new JsonResponse($this->serializer->normalize($receivers));

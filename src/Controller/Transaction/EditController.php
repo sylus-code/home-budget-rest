@@ -15,12 +15,12 @@ class EditController
 {
     private $transactionRepository;
     private $paymentRepository;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         TransactionRepository $transactionRepository,
         PaymentRepository $paymentRepository
-    )
-    {
+    ) {
         $this->em = $entityManager;
         $this->transactionRepository = $transactionRepository;
         $this->paymentRepository = $paymentRepository;
@@ -38,10 +38,9 @@ class EditController
             ->transactionRepository
             ->find($id);
 
-
-        // sprawdz czy jest w gole jesttaka transakcja, jak nie ma to zwroc 404
+        // sprawdz czy jest w gole jest taka transakcja, jak nie ma to zwroc 404
         if ($transaction->getId() === null){
-            return new JsonResponse([], 404);
+            return new JsonResponse([], JsonResponse::HTTP_NOT_FOUND);
         }
 
         // get data from request and
@@ -56,7 +55,8 @@ class EditController
             $updated = true;
         }
         if (isset($transactionData['date'])) {
-            $transaction->setDate($transactionData['date']);
+            $date = new \DateTime($transactionData['date']);
+            $transaction->setDate($date);
             $updated = true;
         }
         if (isset($transactionData['name'])) {
@@ -73,7 +73,7 @@ class EditController
         if (isset($transactionData['paymentId'])) {
             $payment = $this->paymentRepository->find($transactionData['paymentId']);
             if ($payment === null){
-                return new JsonResponse([], 404);
+                return new JsonResponse([], JsonResponse::HTTP_NOT_FOUND);
             }
             $transaction->setPayment($payment);
             $updated = true;

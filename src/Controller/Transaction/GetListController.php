@@ -24,7 +24,7 @@ class GetListController
      * @Route( path="/api/transaction", name="transaction_get_list", methods={"GET"})
      * @return JsonResponse
      */
-    public function action():JsonResponse
+    public function action(): JsonResponse
     {
         $transactions = $this
             ->transactionRepository
@@ -32,7 +32,7 @@ class GetListController
 
         if (!$transactions)
         {
-            return new JsonResponse([], 404);
+            return new JsonResponse([], JsonResponse::HTTP_NOT_FOUND);
         }
         return new JsonResponse($this->serializer->normalize($transactions));
     }

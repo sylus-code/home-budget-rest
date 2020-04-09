@@ -24,7 +24,7 @@ class AddController
      * @param Request $request
      * @return JsonResponse
      */
-    public function action(Request $request)
+    public function action(Request $request) :JsonResponse
     {
         $transactionData = json_decode($request->getContent(), true);
         /** @var Transaction $transaction */
