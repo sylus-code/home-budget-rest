@@ -48,7 +48,7 @@ class Transaction
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Payment", inversedBy="transaction")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $payment;
 
