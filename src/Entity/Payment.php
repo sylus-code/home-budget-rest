@@ -39,9 +39,9 @@ class Payment
     private $type;
 
     /**
-     * @ORM\Column(type="datetime", name="due_date")
+     * @ORM\Column(type="integer", name="due_day", nullable=true)
      */
-    private $dueDate;
+    private $dueDay;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -49,17 +49,17 @@ class Payment
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=500)
+     * @ORM\Column(type="string", length=500, nullable=true)
      */
     private $note;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true, name="expiry_date")
+     * @ORM\Column(type="datetime", nullable=true, name="expiry_date", nullable=true)
      */
     private $expiryDate;
 
     /**
-     * @ORM\Column(type="string", length=255 , name="bank_account_number")
+     * @ORM\Column(type="string", length=255 , name="bank_account_number", nullable=true)
      */
     private $bankAccountNumber;
 
@@ -71,7 +71,7 @@ class Payment
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Transaction", mappedBy="payment", orphanRemoval=true)
      */
-    private $transaction;
+    private $transactions;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Receiver", inversedBy="payments")
@@ -80,7 +80,7 @@ class Payment
 
     public function __construct()
     {
-        $this->transaction = new ArrayCollection();
+        $this->transactions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -136,14 +136,14 @@ class Payment
         return $this;
     }
 
-    public function getDueDate(): ?\DateTimeInterface
+    public function getDueDay(): ?\DateTimeInterface
     {
-        return $this->dueDate;
+        return $this->dueDay;
     }
 
-    public function setDueDate(\DateTimeInterface $dueDate): self
+    public function setDueDay(\DateTimeInterface $dueDay): self
     {
-        $this->dueDate = $dueDate;
+        $this->dueDay = $dueDay;
 
         return $this;
     }
@@ -211,15 +211,15 @@ class Payment
     /**
      * @return Collection|Transaction[]
      */
-    public function getTransaction(): Collection
+    public function getTransactions(): Collection
     {
-        return $this->transaction;
+        return $this->transactions;
     }
 
     public function addTransaction(Transaction $transaction): self
     {
-        if (!$this->transaction->contains($transaction)) {
-            $this->transaction[] = $transaction;
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions[] = $transaction;
             $transaction->setPayment($this);
         }
 
@@ -228,8 +228,8 @@ class Payment
 
     public function removeTransaction(Transaction $transaction): self
     {
-        if ($this->transaction->contains($transaction)) {
-            $this->transaction->removeElement($transaction);
+        if ($this->transactions->contains($transaction)) {
+            $this->transactions->removeElement($transaction);
             // set the owning side to null (unless already changed)
             if ($transaction->getPayment() === $this) {
                 $transaction->setPayment(null);
