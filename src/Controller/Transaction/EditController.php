@@ -29,7 +29,7 @@ class EditController
     /**
      * @param $request
      * @param $id
-     * @Route( path="/api/transaction/{id}", name="transaction_edit", methods={"PUT"})
+     * @Route( path="/api/me/transaction/{id}", name="transaction_edit", methods={"PUT"})
      * @return JsonResponse
      */
     public function action(Request $request, int $id): JsonResponse
