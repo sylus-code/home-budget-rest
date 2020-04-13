@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PaymentRepository")
@@ -15,51 +16,61 @@ class Payment
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"transaction_get_list", "payment_get_list", "receiver_get_list"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime", name="start_date")
+     * @Groups({"transaction_get_list", "payment_get_list", "receiver_get_list"})
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups({"transaction_get_list", "payment_get_list", "receiver_get_list"})
      */
     private $frequency;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"transaction_get_list", "payment_get_list", "receiver_get_list"})
      */
     private $amount;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups({"transaction_get_list", "payment_get_list", "receiver_get_list"})
      */
     private $type;
 
     /**
      * @ORM\Column(type="integer", name="due_day", nullable=true)
+     * @Groups({"transaction_get_list", "payment_get_list", "receiver_get_list"})
      */
     private $dueDay;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"transaction_get_list", "payment_get_list", "receiver_get_list"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
+     * @Groups({"transaction_get_list", "payment_get_list", "receiver_get_list"})
      */
     private $note;
 
     /**
      * @ORM\Column(type="datetime", nullable=true, name="expiry_date", nullable=true)
+     * @Groups({"transaction_get_list", "payment_get_list", "receiver_get_list"})
      */
     private $expiryDate;
 
     /**
      * @ORM\Column(type="string", length=255 , name="bank_account_number", nullable=true)
+     * @Groups({"transaction_get_list", "payment_get_list", "receiver_get_list"})
      */
     private $bankAccountNumber;
 
@@ -70,11 +81,13 @@ class Payment
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Transaction", mappedBy="payment", orphanRemoval=true)
+     * @Groups("payment_get_list")
      */
     private $transactions;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Receiver", inversedBy="payments")
+     * @Groups({"transaction_get_list", "payment_get_list"})
      */
     private $reciever;
 
