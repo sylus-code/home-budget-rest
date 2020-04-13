@@ -15,6 +15,7 @@ class EditController
 {
     private $transactionRepository;
     private $paymentRepository;
+    private $em;
 
     public function __construct(
         EntityManagerInterface $entityManager,
