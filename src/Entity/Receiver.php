@@ -16,13 +16,13 @@ class Receiver
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups ("transaction_get_list")
+     * @Groups({"transaction_get_list", "payment_get_list"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("transaction_get_list")
+     * @Groups({"transaction_get_list", "payment_get_list"})
      */
     private $name;
 

@@ -14,37 +14,37 @@ class Transaction
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("transaction_get_list")
+     * @Groups({"transaction_get_list", "payment_get_list"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups("transaction_get_list")
+     * @Groups({"transaction_get_list", "payment_get_list"})
      */
     private $date;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("transaction_get_list")
+     * @Groups({"transaction_get_list", "payment_get_list"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups("transaction_get_list")
+     * @Groups({"transaction_get_list", "payment_get_list"})
      */
     private $amount;
 
     /**
      * @ORM\Column(type="smallint")
-     * @Groups("transaction_get_list")
+     * @Groups({"transaction_get_list", "payment_get_list"})
      */
     private $type;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups("transaction_get_list")
+     * @Groups({"transaction_get_list", "payment_get_list"})
      */
     private $status;
 
