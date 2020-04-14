@@ -8,7 +8,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TransactionRepository")
  */
-class Transaction
+class Transaction implements UserIdAwareInterface
 {
     /**
      * @ORM\Id()

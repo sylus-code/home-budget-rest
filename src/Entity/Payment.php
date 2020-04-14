@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PaymentRepository")
  */
-class Payment
+class Payment implements UserIdAwareInterface
 {
     /**
      * @ORM\Id()

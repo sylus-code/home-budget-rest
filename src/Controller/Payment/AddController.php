@@ -1,11 +1,9 @@
 <?php
 
-
 namespace App\Controller\Payment;
 
-
 use App\Entity\Payment;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\PersistWithUserIdWrapper;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,13 +11,15 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class AddController
 {
-    private $em;
     private $denormalizer;
+    private $persistWrapper;
 
-    public function __construct(EntityManagerInterface $em, SerializerInterface $denormalizer)
-    {
-        $this->em = $em;
+    public function __construct(
+        SerializerInterface $denormalizer,
+        PersistWithUserIdWrapper $persistWrapper
+    ) {
         $this->denormalizer = $denormalizer;
+        $this->persistWrapper = $persistWrapper;
     }
 
     /**
@@ -30,13 +30,8 @@ class AddController
     public function action(Request $request): JsonResponse
     {
         $paymentData = json_decode($request->getContent(), true);
-
         $payment = $this->denormalizer->denormalize($paymentData, Payment::class);
-
-        /** @var Payment $payment */
-        $payment->setUserId(1);
-        $this->em->persist($payment);
-        $this->em->flush();
+        $this->persistWrapper->save($payment);
 
         return new JsonResponse([], JsonResponse::HTTP_CREATED);
     }
