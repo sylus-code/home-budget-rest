@@ -1,11 +1,9 @@
 <?php
 
-
 namespace App\Controller\Transaction;
 
-
 use App\Entity\Transaction;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\PersistWithUserIdWrapper;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,10 +11,15 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class AddController
 {
-    public function __construct(EntityManagerInterface $entityManager, SerializerInterface $denormalizer )
-    {
+    private $denormalizer;
+    private $persistWrapper;
+
+    public function __construct(
+        SerializerInterface $denormalizer,
+        PersistWithUserIdWrapper $persistWrapper
+    ) {
         $this->denormalizer = $denormalizer;
-        $this->em = $entityManager;
+        $this->persistWrapper = $persistWrapper;
     }
 
     /**
@@ -27,11 +30,8 @@ class AddController
     public function action(Request $request) :JsonResponse
     {
         $transactionData = json_decode($request->getContent(), true);
-        /** @var Transaction $transaction */
         $transaction = $this->denormalizer->denormalize($transactionData, Transaction::class);
-        $transaction->setUserId(1);
-        $this->em->persist($transaction);
-        $this->em->flush();
+        $this->persistWrapper->save($transaction);
 
         return new JsonResponse([], JsonResponse::HTTP_CREATED);
     }
