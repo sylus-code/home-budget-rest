@@ -1,0 +1,4 @@
+spiderman_security:
+  base_uri: '%env(SPIDERMAN_BASE_URI)%'
+  api_key: '%env(SPIDERMAN_API_KEY)%'
+  firebase_project_id: '%env(FIREBASE_AUTH_PROJECT_ID)%'
