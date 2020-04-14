@@ -19,8 +19,7 @@ class EditController
 
     public function __construct(
         PaymentRepository $paymentRepository, EntityManagerInterface $em, ReceiverRepository $receiverRepository
-    )
-    {
+    ){
         $this->paymentRepository = $paymentRepository;
         $this->em = $em;
         $this->receiverRepository = $receiverRepository;
