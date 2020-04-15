@@ -23,7 +23,7 @@ class AddController
     }
 
     /**
-     * @Route( path="/api/transaction", name="transaction_add", methods={"POST"})
+     * @Route( path="/api/me/transaction", name="transaction_add", methods={"POST"})
      * @param Request $request
      * @return JsonResponse
      */
@@ -33,6 +33,9 @@ class AddController
         $transaction = $this->denormalizer->denormalize($transactionData, Transaction::class);
         $this->persistWrapper->save($transaction);
 
-        return new JsonResponse([], JsonResponse::HTTP_CREATED);
+        $response = new JsonResponse([], JsonResponse::HTTP_CREATED);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+
+        return $response;
     }
 }

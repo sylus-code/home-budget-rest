@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controller\Payment;
-
 
 use App\Repository\PaymentRepository;
 use App\Repository\ReceiverRepository;
@@ -19,7 +17,7 @@ class EditController
 
     public function __construct(
         PaymentRepository $paymentRepository, EntityManagerInterface $em, ReceiverRepository $receiverRepository
-    ){
+    ) {
         $this->paymentRepository = $paymentRepository;
         $this->em = $em;
         $this->receiverRepository = $receiverRepository;
@@ -87,12 +85,14 @@ class EditController
             $payment->setReciever($receiver);
             $updated = true;
         }
-
         if ($updated){
             $this->em->persist($payment);
             $this->em->flush();
         }
 
-        return new JsonResponse();
+        $response = new JsonResponse();
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+
+        return $response;
     }
 }

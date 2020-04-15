@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controller\Receiver;
-
 
 use App\Repository\ReceiverRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,7 +22,7 @@ class EditController
     /**
      * @param Request $request
      * @param int $id
-     * @Route( path="/api/receiver/{id}", name="receiver_edit", methods={"PUT"})
+     * @Route( path="/api/me/receiver/{id}", name="receiver_edit", methods={"PUT"})
      * @return JsonResponse
      */
     public function action(Request $request, int $id): JsonResponse
@@ -50,6 +48,9 @@ class EditController
             $this->em->flush();
         }
 
-        return new JsonResponse();
+        $response = new JsonResponse();
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+
+        return $response;
     }
 }
