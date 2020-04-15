@@ -34,6 +34,9 @@ class AddController extends AbstractController
         $this->em->persist($receiver);
         $this->em->flush();
 
-        return new JsonResponse([], Response::HTTP_CREATED);
+        $response = new JsonResponse([], Response::HTTP_CREATED);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+
+        return $response;
     }
 }

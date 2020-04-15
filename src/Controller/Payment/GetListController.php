@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controller\Payment;
-
 
 use App\Repository\PaymentRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -37,6 +35,10 @@ class GetListController
 
             return new JsonResponse([], JsonResponse::HTTP_NOT_FOUND);
         }
-        return new JsonResponse($this->normalizer->normalize($payments,"array",["groups" => "payment_get_list"]));
+
+        $response = new JsonResponse($this->normalizer->normalize($payments,"array",["groups" => "payment_get_list"]));
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+
+        return $response;
     }
 }

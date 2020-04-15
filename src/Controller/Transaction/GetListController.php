@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controller\Transaction;
-
 
 use App\Repository\TransactionRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,7 +22,7 @@ class GetListController
     }
 
     /**
-     * @Route( path="/api/transaction", name="transaction_get_list", methods={"GET"})
+     * @Route( path="/api/me/transaction", name="transaction_get_list", methods={"GET"})
      * @return JsonResponse
      * @throws
      */
@@ -39,6 +37,9 @@ class GetListController
             return new JsonResponse([], JsonResponse::HTTP_NOT_FOUND);
         }
 
-        return new JsonResponse($this->normalizer->normalize($transactions, "array", ["groups" => "transaction_get_list"]));
+        $response = new JsonResponse($this->normalizer->normalize($transactions, "array", ["groups" => "transaction_get_list"]));
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+
+        return $response;
     }
 }

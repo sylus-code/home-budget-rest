@@ -33,6 +33,9 @@ class AddController
         $payment = $this->denormalizer->denormalize($paymentData, Payment::class);
         $this->persistWrapper->save($payment);
 
-        return new JsonResponse([], JsonResponse::HTTP_CREATED);
+        $response = new JsonResponse([], JsonResponse::HTTP_CREATED);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        
+        return $response;
     }
 }

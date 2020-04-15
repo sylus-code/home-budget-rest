@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controller\Transaction;
-
 
 use App\Repository\PaymentRepository;
 use App\Repository\TransactionRepository;
@@ -87,6 +85,9 @@ class EditController
 
         }
 
-        return new JsonResponse();
+        $response = new JsonResponse();
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+
+        return $response;
     }
 }
