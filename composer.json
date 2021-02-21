@@ -57,13 +57,6 @@
     "conflict": {
         "symfony/symfony": "*"
     },
-    "repositories": [
-        {
-            "name": "coderaf/spiderman-security-bundle",
-            "type": "vcs",
-            "url": "git@bitbucket.org-coderaf:coderaf/spiderman-security-bundle.git"
-        }
-    ],
     "extra": {
         "symfony": {
             "allow-contrib": false,
